@@ -9,8 +9,10 @@ import pprint
 import random
 
 
+DIR = os.path.abspath(os.path.dirname(sys.argv[0]))
+
 def choose_random_search_term():
-    SEARCH_WORD_LIST = 'searchoptions.txt'
+    SEARCH_WORD_LIST = os.path.join(DIR, 'searchoptions.txt')
     #SEARCH_WORD_LIST = '/usr/share/dict/words'
 
     search_terms = [
@@ -64,6 +66,8 @@ response = urllib2.urlopen(request)
 
 picture = response.read()
 
-open('image.jpg', 'wb').write(picture)
-os.system('eog image.jpg &')
+IMAGE_FILE = os.path.join(DIR, 'image.jpg')
+
+open(IMAGE_FILE, 'wb').write(picture)
+os.system('eog %s &' % (IMAGE_FILE,))
 
